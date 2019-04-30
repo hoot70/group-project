@@ -18,25 +18,39 @@ const database = firebase.database()
 
 class App extends React.Component {
   constructor (){
-    super()
+    super();
+     this.state = {
+      location: 'Where do You Want to Go'
+    };
   };
+
+  componentDidMount(){
+    const textRef = database.ref('location/');
+    
+    textRef.on('value', snapshot => {
+      this.setState({
+        location: snapshot.val()
+      })
+    })
+  }
+
+  writeData = e => {
+    e.preventDefault();
+    const locationValue = e.target.elements.inputLocation.value;
+    database.ref('location/').set(locationValue, function(error){
+      error ? alert('error') : console.log('it works')})
+  }
 
   render (){
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>{this.state.location}</h1>
+        <form onSubmit={this.writeData.bind(this)}>
+            <input type='text' name='inputLocation'/>
+            <input type='submit' name='submitButton' />
+        </form>
       </header>
     </div>
   );
