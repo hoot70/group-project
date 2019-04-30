@@ -3,6 +3,7 @@ import logo, { ReactComponent } from './logo.svg'
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import * as firebase from 'firebase';
+import location from "./components/location"
 
 var config = {
   apiKey: "AIzaSyAia2WZr0S88ovOJ7JWmCjRz63aoIiWpZw",
@@ -42,19 +43,16 @@ class App extends React.Component {
   }
 
   render (){
-  return (
-    <div className="App">
+    {
+      return(
+        <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>{this.state.location}</h1>
-        <form onSubmit={this.writeData.bind(this)}>
-            <input type='text' name='inputLocation'/>
-            <input type='submit' name='submitButton' />
-        </form>
+      <BrowserRouter>
+        <Route path="/" component={location} exact/>
+        </BrowserRouter>
       </header>
     </div>
-  );
+      )}
 }
 }
-
 export default App;
