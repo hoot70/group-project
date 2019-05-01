@@ -3,7 +3,9 @@ import logo, { ReactComponent } from './logo.svg'
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import * as firebase from 'firebase';
+import home from "./components/home"
 import location from "./components/location"
+import results from "./components/results"
 
 var config = {
   apiKey: "AIzaSyAia2WZr0S88ovOJ7JWmCjRz63aoIiWpZw",
@@ -48,7 +50,9 @@ class App extends React.Component {
         <div className="App">
       <header className="App-header">
       <BrowserRouter>
-        <Route path="/" component={location} exact/>
+        <Route path="/" component={home} exact/>
+        <Route path="/location" component={location}/>
+        <Route path="/results" component={results}/>
         </BrowserRouter>
       </header>
     </div>
