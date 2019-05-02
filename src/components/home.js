@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Switch, Link, withRouter } from 'react-router-dom'
 // import { , hashHistory,  browserHistory } from 'react-router'
 import * as firebase from 'firebase';
 
+
 var config = {
     apiKey: "AIzaSyAia2WZr0S88ovOJ7JWmCjRz63aoIiWpZw",
     authDomain: "groupproject-45878.firebaseapp.com",
@@ -13,7 +14,7 @@ var config = {
     storageBucket: "groupproject-45878.appspot.com",
     messagingSenderId: "281486642276"
   };
-  
+
   firebase.initializeApp(config)
   const database = firebase.database()
 
