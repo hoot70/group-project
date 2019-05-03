@@ -4,9 +4,10 @@ import { NavLink } from "react-router-dom";
 import * as firebase from "firebase";
 import Home from "./home";
 import { returnStatement } from "@babel/types";
+import Geocode from "react-geocode";
 
 const database = firebase.database();
-  
+
 
 class Location extends React.Component {
   constructor(props) {
@@ -14,7 +15,9 @@ class Location extends React.Component {
     this.state = {
       location: "",
       data: [],
-      isLoaded: false
+      isLoaded: false,
+      lat: null,
+      lng: null
     };
   }
   async componentDidMount() {
@@ -54,9 +57,22 @@ class Location extends React.Component {
         })
       });
     })
-  }
+  
 
-  render() {
+
+    Geocode.setApiKey("AIzaSyCifmubhS9MPSr0F6DMjJw2izXGa4SlPE8");
+Geocode.fromAddress("Chicago").then(
+  response => {
+    const { lat, lng } = response.results[0].geometry.location;
+    console.log(lat, lng);
+  },
+  error => {
+    console.error(error);
+  }
+);
+  }
+  
+render() {
     console.log(this.state.data)
     return (
       <div className="location">
