@@ -3,73 +3,70 @@ import "../css/location.css";
 import { NavLink } from "react-router-dom";
 import * as firebase from "firebase";
 import Home from "./home";
-import { argumentPlaceholder } from "@babel/types";
+import { returnStatement } from "@babel/types";
 
 const database = firebase.database();
- 
+  
 
 class Location extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       location: "",
+      data: [],
+      isLoaded: false
     };
   }
-  componentDidMount() {
+  async componentDidMount() {
     const textRef = database.ref("location/");
 
-    textRef.on("value", snapshot => {
+    textRef.on("value", async snapshot => {
       this.setState({
         location: snapshot.val(),
       });
-
-      fetch(`https://developers.zomato.com/api/v2.1/cities?q=${snapshot.val()}`, {
+      await fetch(`https://developers.zomato.com/api/v2.1/cities?q=${snapshot.val()}`, {
       headers: { 
         "user-key": "353df7cd3c0ea42ca7228a954662f51b",
         "Content-Type": "text/json",
      },
     })
-      .then(function(response) {
+      .then((response) => {
         return response.json();
       })
-      .then(async function(myJson) {
-        console.log(myJson);
-        fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=${myJson.location_suggestions[0].id}&entity_type=city`, {
+      .then(async (myJson) => {
+        await fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=${myJson.location_suggestions[0].id}&entity_type=city&count=20`, {
           headers: { 
             "user-key": "353df7cd3c0ea42ca7228a954662f51b",
             "Content-Type": "text/json",
          }
-        }).then(function(response1) {
-          return response1.json();
+        }).then(res => {
+          if (res.ok){
+            return res.json()
+          } else {
+            throw Error(res.statusText);
+          }
         })
-        .then(function(myJson) {
-          console.log(myJson)
+        .then(json => {
+          this.setState({
+            data: json.restaurants,
+            isLoaded: true
+          })
         })
-      })
-    });
-    }
-    
-    writeData = e => {
-      e.preventDefault();
-      const menuValue = e.target.elements.menuLocation.value;
-      database.ref('menu/').set(menuValue, function(error){
-        error ? alert('error') : console.log('Good Job!')})
-        this.props.history.push('/results');
-    }
-  
-  
- render() {
+      });
+    })
+  }
+
+  render() {
+    console.log(this.state.data)
     return (
       <div className="location">
         <h1>Welcome to {this.state.location}</h1>
+        <p>{this.state.data[0] ? this.state.data[0].restaurant.name : 'Loading...'}</p>
         <div>
-          Enter The Cuisine You Are Looking For
           <br />
-          <form onSubmit={this.writeData.bind(this)}>
-     <input type="text" name="menuLocation" />
-     <button type='submit'>Submit</button>
-     </form>
+          <input type="text" name="inputText" />
         </div>
+        <NavLink to="/results">Submit</NavLink>
       </div>
     );
   }
