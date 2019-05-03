@@ -1,9 +1,21 @@
 import React from 'react';
 import '../css/home.css';
-// import Enter from "./enter";
-import {BrowserRouter, Route, Switch, Link, withRouter } from 'react-router-dom';
-// import { , hashHistory,  browserHistory } from 'react-router'
+import {withRouter } from 'react-router-dom';
 import * as firebase from 'firebase';
+// import MapContainer from './Googlemap';
+import BackgroundSlideshow from 'react-background-slideshow'
+import image1 from './assets/Charlotte.jpg';
+import image2 from './assets/NYC.jpg';
+import image3 from './assets/Boston.jpg';
+import image4 from './assets/Chicago.jpg';
+
+
+const images = [
+  image1,
+  image2,
+  image3,
+  image4
+]
 
 
 var config = {
@@ -14,7 +26,7 @@ var config = {
     storageBucket: "groupproject-45878.appspot.com",
     messagingSenderId: "281486642276"
   };
-
+  
   firebase.initializeApp(config)
   const database = firebase.database()
 
@@ -46,14 +58,20 @@ class Home extends React.Component {
       render (){
     return(
      <div className="Homepage">
+     <div className="image">
+      <BackgroundSlideshow images={images} />
+    </div>
      <div>Enter Your Location
+  
          <br />
-         <form onSubmit={this.writeData.bind(this)}>
-     <input type="text" name="inputLocation" />
-     <button type='submit'>Submit</button>
+     <form onSubmit={this.writeData.bind(this)}>
+        <input type="text" name="inputLocation" />
+        <button type='submit'>Submit</button>
      </form>
+     {/* <MapContainer/> */}
      </div>
      </div>
+    
     )
       }
 }

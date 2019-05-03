@@ -56,18 +56,19 @@ class Location extends React.Component {
           })
         })
       });
+      Geocode.setApiKey("AIzaSyCifmubhS9MPSr0F6DMjJw2izXGa4SlPE8");
+      Geocode.fromAddress(`${snapshot.val()}`).then(
+        response => {
+          const { lat, lng } = response.results[0].geometry.location;
+          console.log(lat, lng);
+        },
+        error => {
+          console.log("error");
     })
   
 
 
-    Geocode.setApiKey("AIzaSyCifmubhS9MPSr0F6DMjJw2izXGa4SlPE8");
-Geocode.fromAddress("Chicago").then(
-  response => {
-    const { lat, lng } = response.results[0].geometry.location;
-    console.log(lat, lng);
-  },
-  error => {
-    console.error(error);
+   
   }
 );
   }
