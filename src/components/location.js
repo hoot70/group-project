@@ -61,13 +61,25 @@ class Location extends React.Component {
     return (
       <div className="location">
         <h1>Welcome to {this.state.location}</h1>
-        <p>{this.state.data[0] ? this.state.data[0].restaurant.name : 'Loading...'}</p>
-        <div>
-          <br />
-          <input type="text" name="inputText" />
-        </div>
-        <NavLink to="/results">Submit</NavLink>
-      </div>
+        <table>
+        <tr>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Restaurant Type</th>
+        </tr>
+        { 
+          Object.keys(this.state.data).map((item, i) => (
+            <tbody>
+        <tr className="restaurants-input" key={i}>
+            <a href={this.state.data[item].restaurant.menu_url} target='_blank'><td>{ this.state.data[item].restaurant.name? this.state.data[item].restaurant.name : 'Loading...'}</td></a>
+            <td>{ this.state.data[item].restaurant.location.address? this.state.data[item].restaurant.location.address : 'Loading...'}</td>
+            <td>{ this.state.data[item].restaurant.cuisines? this.state.data[item].restaurant.cuisines : 'Loading...'}</td>
+        </tr>
+        </tbody>
+    ))
+}  
+</table>
+</div>
     );
   }
 }
