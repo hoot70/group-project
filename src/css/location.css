@@ -2,10 +2,21 @@
     text-align: center;
     background-color: #282c34;
     min-height: 100vh;
-    color: white;
+    color: black;
     align-items: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
     font-size: calc(20px + 2vmin);
+    font-family: 'Oswald', sans-serif;
+}
+li{
+    list-style: none;
+}
+.card{
+    height: 7em;
+    margin: 10px;
+}
+.restaurants-input{
+    padding-left: 0;
 }
