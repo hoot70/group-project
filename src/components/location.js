@@ -6,13 +6,11 @@ import Home from "./home";
 import { returnStatement } from "@babel/types";
 import Geocode from "react-geocode";
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from "google-maps-react";
-
 const database = firebase.database();
 const style = {
   width: "700px",
   height: "350px",
 };
-
 class Location extends React.Component {
   constructor(props) {
     super(props);
@@ -22,17 +20,11 @@ class Location extends React.Component {
       isLoaded: false,
       lat: null,
       lng: null,
-      activeMarker: {},
-    selectedPlace: {},
-    showingInfoWindow: false
     };
   }
-
   
-
   async componentDidMount() {
     const textRef = database.ref("location/");
-
     textRef.on("value", async snapshot => {
       this.setState({
         location: snapshot.val(),
@@ -88,33 +80,14 @@ class Location extends React.Component {
           console.error(error);
         }
       );
+      
     });
   }
-  onMarkerClick = (props, marker) =>
-    this.setState({
-      activeMarker: marker,
-      selectedPlace: props,
-      showingInfoWindow: true
-    });
-
-  onInfoWindowClose = () =>
-    this.setState({
-      activeMarker: null,
-      showingInfoWindow: false
-    });
-
-  onMapClicked = () => {
-    if (this.state.showingInfoWindow)
-      this.setState({
-        activeMarker: null,
-        showingInfoWindow: false
-      });
-    };
-
   render() {
     console.log(this.state.data[0]);
     return (
       <div className="location">
+        
         <h1>Welcome to {this.state.location}</h1>
         <div className="map-template">
           <Map
@@ -134,55 +107,63 @@ class Location extends React.Component {
                   lat: this.state.data[item].restaurant.location.latitude,
                   lng: this.state.data[item].restaurant.location.longitude,
                 }}
-                onClick={this.onMarkerClick}
               >
-            </Marker>
+              </Marker>
             ))}
-            <InfoWindow
-
-              marker={this.state.activeMarker}
-              onClose={this.onInfoWindowClose}
-              visible={this.state.showingInfoWindow}>
-              <div style={{color: 'black'}}>
-                <h1>{this.state.selectedPlace.name}</h1>
-              </div>
-            </InfoWindow>
           </Map>
+        
         </div>
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Restaurant Type</th>
-          </tr>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        
+        
+        <div className="row">
+          
           {Object.keys(this.state.data).map((item, i) => (
-            <tbody>
-              <tr className="restaurants-input" key={i}>
+          <div className="col-md-4">
+            <div className="card">
+          
+              <ul className="restaurants-input" key={i}>
+                
+                <div className="card-header">
                 <a
                   href={this.state.data[item].restaurant.menu_url}
                   target="_blank"
                 >
-                  <td>
-                    {this.state.data[item].restaurant.name
+                  
+                    <li>{this.state.data[item].restaurant.name
                       ? this.state.data[item].restaurant.name
                       : "Loading..."}
-                  </td>
+                    </li>
                 </a>
-                <td>
-                  {this.state.data[item].restaurant.location.address
+                </div>
+                  
+                  <li>{this.state.data[item].restaurant.location.address
                     ? this.state.data[item].restaurant.location.address
                     : "Loading..."}
-                </td>
-                <td>
-                  {this.state.data[item].restaurant.cuisines
+                  </li>
+                
+                
+                  <li><i>{this.state.data[item].restaurant.cuisines
                     ? this.state.data[item].restaurant.cuisines
-                    : "Loading..."}
-                </td>
-              </tr>
-            </tbody>
+                    : "Loading..."}</i>
+                  </li>
+              
+              </ul>
+            
+            </div>
+          </div>
+          
           ))}
-        </table>
       </div>
+    </div>
     );
   }
 }

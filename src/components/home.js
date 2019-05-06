@@ -2,7 +2,6 @@ import React from 'react';
 import '../css/home.css';
 import {withRouter } from 'react-router-dom';
 import * as firebase from 'firebase';
-// import MapContainer from './Googlemap';
 import BackgroundSlideshow from 'react-background-slideshow'
 import image1 from './assets/Charlotte.jpg';
 import image2 from './assets/NYC.jpg';
@@ -59,7 +58,7 @@ class Home extends React.Component {
     return(
      <div className="Homepage">
      <div className="image">
-      <BackgroundSlideshow images={images} />
+      <BackgroundSlideshow images={images}/>
     </div>
      <div>Enter Your Location
   
@@ -68,7 +67,6 @@ class Home extends React.Component {
         <input type="text" name="inputLocation" />
         <button type='submit'>Submit</button>
      </form>
-     {/* <MapContainer/> */}
      </div>
      </div>
     
