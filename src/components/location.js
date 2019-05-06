@@ -22,6 +22,9 @@ class Location extends React.Component {
       isLoaded: false,
       lat: null,
       lng: null,
+      activeMarker: {},
+    selectedPlace: {},
+    showingInfoWindow: false
     };
   }
 
@@ -85,9 +88,28 @@ class Location extends React.Component {
           console.error(error);
         }
       );
-      
     });
   }
+  onMarkerClick = (props, marker) =>
+    this.setState({
+      activeMarker: marker,
+      selectedPlace: props,
+      showingInfoWindow: true
+    });
+
+  onInfoWindowClose = () =>
+    this.setState({
+      activeMarker: null,
+      showingInfoWindow: false
+    });
+
+  onMapClicked = () => {
+    if (this.state.showingInfoWindow)
+      this.setState({
+        activeMarker: null,
+        showingInfoWindow: false
+      });
+    };
 
   render() {
     console.log(this.state.data[0]);
@@ -112,9 +134,19 @@ class Location extends React.Component {
                   lat: this.state.data[item].restaurant.location.latitude,
                   lng: this.state.data[item].restaurant.location.longitude,
                 }}
+                onClick={this.onMarkerClick}
               >
-              </Marker>
+            </Marker>
             ))}
+            <InfoWindow
+
+              marker={this.state.activeMarker}
+              onClose={this.onInfoWindowClose}
+              visible={this.state.showingInfoWindow}>
+              <div style={{color: 'black'}}>
+                <h1>{this.state.selectedPlace.name}</h1>
+              </div>
+            </InfoWindow>
           </Map>
         </div>
         <table>
