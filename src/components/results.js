@@ -17,8 +17,6 @@ class Results extends React.Component {
         id: '',
         data: [],
         isLoaded: false,
-        lat: '',
-        lng: '',
       };
     }
     async componentDidMount() {
@@ -46,8 +44,6 @@ await fetch(
     .then(json => {
       this.setState({
         data: json,
-        lat: json.location.latitude,
-        lng: json.location.longitude,
         isLoaded: true,
       });
     });
@@ -61,6 +57,34 @@ render (){
      <div>
      <NavLink to="/location">Back</NavLink>
          <h1>{this.state.data.name}</h1>
+         <div className="map-template">
+         <Map
+            google={this.props.google}
+            zoom={17}
+            style={style}
+            center={{
+              lat: this.state.data.location && this.state.data.location.latitude,
+              lng: this.state.data.location && this.state.data.location.longitude,
+            }}
+            onClick={this.onMapClicked}
+          >
+          <Marker
+          position={{
+              lat: this.state.data.location && this.state.data.location.latitude,
+              lng: this.state.data.location && this.state.data.location.longitude,
+            }}>
+              </Marker>
+              </Map>
+              </div>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
          <img src={this.state.data.featured_image}></img>
          <h2>{this.state.data.location && this.state.data.location.locality}</h2>
          <h2>{this.state.data.location && this.state.data.location.address}</h2>
@@ -77,4 +101,6 @@ render (){
 }
     }
 
-export default Results;
+export default GoogleApiWrapper({
+    apiKey: "AIzaSyCifmubhS9MPSr0F6DMjJw2izXGa4SlPE8",
+  })(Results);
