@@ -58,6 +58,9 @@ render (){
      <NavLink to="/location">Back</NavLink>
          <h1>{this.state.data.name}</h1>
          <div className="map-template">
+         <img src={this.state.data.featured_image}></img>
+         <br/>
+         <br/>
          <Map
             google={this.props.google}
             zoom={17}
@@ -85,7 +88,7 @@ render (){
           <br/>
           <br/>
           <br/>
-         <img src={this.state.data.featured_image}></img>
+          
          <h2>{this.state.data.location && this.state.data.location.locality}</h2>
          <h2>{this.state.data.location && this.state.data.location.address}</h2>
          <h2>{this.state.data.cuisines}</h2>
