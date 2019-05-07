@@ -178,7 +178,7 @@ class Location extends React.Component {
             <div className="card">
           
               <ul className="restaurants-input" key={i}>
-                
+              <img class="card-img-top" src={this.state.data[item].restaurant.featured_image} alt="Image Not Found"></img>
                 <div className="card-header">
                 <li onClick={this.writeData.bind(this)} value={this.state.data[item].restaurant.id}>{this.state.data[item].restaurant.name
                       ? this.state.data[item].restaurant.name

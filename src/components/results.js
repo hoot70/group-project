@@ -54,6 +54,7 @@ render (){
      <div>
      <NavLink to="/location">Back</NavLink>
          <h1>{this.state.data.name}</h1>
+         <h2>{this.state.data.address}</h2>
          <h2>{this.state.data.cuisines}</h2>
          <br />
          <NavLink to="/location">Back</NavLink>
