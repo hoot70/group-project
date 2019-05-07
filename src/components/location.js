@@ -11,6 +11,7 @@ const style = {
   width: "800px",
   height: "400px",
 };
+
 class Location extends React.Component {
   constructor(props) {
     super(props);
@@ -20,8 +21,32 @@ class Location extends React.Component {
       isLoaded: false,
       lat: null,
       lng: null,
+      activeMarker: {},
+    selectedPlace: {},
+    showingInfoWindow: false
     };
   }
+
+  onMarkerClick = (props, marker) =>
+    this.setState({
+      activeMarker: marker,
+      selectedPlace: props,
+      showingInfoWindow: true
+    });
+
+  onInfoWindowClose = () =>
+    this.setState({
+      activeMarker: null,
+      showingInfoWindow: false
+    });
+
+  onMapClicked = () => {
+    if (this.state.showingInfoWindow)
+      this.setState({
+        activeMarker: null,
+        showingInfoWindow: false
+      });
+  };
   
   async componentDidMount() {
     const textRef = database.ref("location/");
@@ -83,6 +108,16 @@ class Location extends React.Component {
       
     });
   }
+
+  writeData = e => {
+    e.preventDefault();
+    const idValue = e.currentTarget.value;
+    database.ref('ID/').set(idValue, function(error){
+      error ? alert('error') : console.log('Good Job!')})
+      this.props.history.push('/results');
+  }
+
+
   render() {
     console.log(this.state.data[0]);
     return (
@@ -100,6 +135,7 @@ class Location extends React.Component {
               lat: this.state.lat,
               lng: this.state.lng,
             }}
+            onClick={this.onMapClicked}
           >
             {Object.keys(this.state.data).map((item, i) => (
               <Marker
@@ -109,9 +145,18 @@ class Location extends React.Component {
                   lat: this.state.data[item].restaurant.location.latitude,
                   lng: this.state.data[item].restaurant.location.longitude,
                 }}
+                onClick={this.onMarkerClick}
               >
               </Marker>
             ))}
+            <InfoWindow
+          marker={this.state.activeMarker}
+          onClose={this.onInfoWindowClose}
+          visible={this.state.showingInfoWindow}>
+          <div>
+            <h1 className='infoMarker'>{this.state.selectedPlace.name}</h1>
+          </div>
+        </InfoWindow>
           </Map>
         
         </div>
@@ -135,16 +180,10 @@ class Location extends React.Component {
               <ul className="restaurants-input" key={i}>
                 
                 <div className="card-header">
-                <a
-                  href={this.state.data[item].restaurant.menu_url}
-                  target="_blank"
-                >
-                  
-                    <li>{this.state.data[item].restaurant.name
+                <li onClick={this.writeData.bind(this)} value={this.state.data[item].restaurant.id}>{this.state.data[item].restaurant.name
                       ? this.state.data[item].restaurant.name
                       : "Loading..."}
                     </li>
-                </a>
                 </div>
                   
                   <li>{this.state.data[item].restaurant.location.address

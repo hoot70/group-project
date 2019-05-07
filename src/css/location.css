@@ -66,3 +66,7 @@ h1{
 .location{
     font-family: 'Oswald', sans-serif;
 }
+
+.infoMarker{
+    color: black;
+}
