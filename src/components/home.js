@@ -60,14 +60,13 @@ class Home extends React.Component {
      <div className="image">
       <BackgroundSlideshow images={images}/>
     </div>
-     <div>Enter Your Location
+     <div className="homeText">Enter Your Location</div>
   
          <br />
-     <form onSubmit={this.writeData.bind(this)}>
+         <form onSubmit={this.writeData.bind(this)}>
         <input type="text" name="inputLocation" />
-        <button type='submit'>Submit</button>
+        <button type='submit'><span>Submit</span></button>
      </form>
-     </div>
      </div>
     
     )
