@@ -88,11 +88,13 @@ render (){
           <br/>
           <br/>
           <br/>
-          
+          <div className="textColor">
          <h2>{this.state.data.location && this.state.data.location.locality}</h2>
          <h2>{this.state.data.location && this.state.data.location.address}</h2>
          <h2>{this.state.data.cuisines}</h2>
          <h2>Average Cost for Two: {this.state.data.currency}{this.state.data.average_cost_for_two}</h2>
+         </div>
+         <br />
          <a href={this.state.data.url} target='_blank'><h2>Web Page</h2></a>
          <a href={this.state.data.menu_url} target='_blank'><h2>Menu Page</h2></a>
          <a href={this.state.data.photos_url} target='_blank'><h2>Photos</h2></a>
