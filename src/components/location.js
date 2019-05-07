@@ -186,8 +186,8 @@ class Location extends React.Component {
                     </li>
                 </div>
                   
-                  <li>{this.state.data[item].restaurant.location.address
-                    ? this.state.data[item].restaurant.location.address
+                  <li>{this.state.data[item].restaurant.location.locality
+                    ? this.state.data[item].restaurant.location.locality
                     : "Loading..."}
                   </li>
                 
