@@ -8,8 +8,8 @@ import Geocode from "react-geocode";
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from "google-maps-react";
 const database = firebase.database();
 const style = {
-  width: "700px",
-  height: "350px",
+  width: "800px",
+  height: "400px",
 };
 class Location extends React.Component {
   constructor(props) {
@@ -88,7 +88,9 @@ class Location extends React.Component {
     return (
       <div className="location">
         
-        <h1>Welcome to {this.state.location}</h1>
+       <div className="headerText">
+       <i>Welcome to {this.state.location}</i>
+       </div>
         <div className="map-template">
           <Map
             google={this.props.google}
