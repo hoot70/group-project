@@ -67,6 +67,14 @@ h1{
     font-family: 'Oswald', sans-serif;
 }
 
+img{
+    height: 7em;
+}
+
 .infoMarker{
     color: black;
+}
+
+.card-header{
+    text-decoration: underline;
 }
