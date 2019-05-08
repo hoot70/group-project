@@ -158,7 +158,6 @@ class Results extends React.Component {
           <br />
         </div>
       </div>
->>>>>>> 6e8f330e151e5c928d9d7252781fdded4f91fd84
     );
   }
 }
