@@ -3,17 +3,19 @@ import '../css/home.css';
 import {withRouter } from 'react-router-dom';
 import * as firebase from 'firebase';
 import BackgroundSlideshow from 'react-background-slideshow'
-import image1 from './assets/Charlotte.jpg';
+import image1 from './assets/Charlotte2.0.jpg';
 import image2 from './assets/NYC.jpg';
 import image3 from './assets/Boston.jpg';
 import image4 from './assets/Chicago.jpg';
+import image5 from './assets/Chicago2.0.jpg';
 
 
 const images = [
   image1,
   image2,
   image3,
-  image4
+  image4,
+  image5
 ]
 
 
