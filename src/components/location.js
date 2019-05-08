@@ -22,8 +22,8 @@ class Location extends React.Component {
       lat: null,
       lng: null,
       activeMarker: {},
-    selectedPlace: {},
-    showingInfoWindow: false
+      selectedPlace: {},
+      showingInfoWindow: false,
     };
   }
 
@@ -31,23 +31,23 @@ class Location extends React.Component {
     this.setState({
       activeMarker: marker,
       selectedPlace: props,
-      showingInfoWindow: true
+      showingInfoWindow: true,
     });
 
   onInfoWindowClose = () =>
     this.setState({
       activeMarker: null,
-      showingInfoWindow: false
+      showingInfoWindow: false,
     });
 
   onMapClicked = () => {
     if (this.state.showingInfoWindow)
       this.setState({
         activeMarker: null,
-        showingInfoWindow: false
+        showingInfoWindow: false,
       });
   };
-  
+
   async componentDidMount() {
     const textRef = database.ref("location/");
     textRef.on("value", async snapshot => {
@@ -105,28 +105,65 @@ class Location extends React.Component {
           console.error(error);
         }
       );
-      
     });
   }
 
   writeData = e => {
     e.preventDefault();
     const idValue = e.currentTarget.value;
-    database.ref('ID/').set(idValue, function(error){
-      error ? alert('error') : console.log('Good Job!')})
-      this.props.history.push('/results');
-      window.scrollTo(0, 0);
-  }
+    database.ref("ID/").set(idValue, function(error) {
+      error ? alert("error") : console.log("Good Job!");
+    });
+    this.props.history.push("/results");
+    window.scrollTo(0, 0);
+  };
 
+  searchBar = e => {
+    e.preventDefault();
+    const locationValue = e.target.elements.inputLocation.value;
+    database.ref("location/").set(locationValue, function(error) {
+      error ? alert("error") : console.log("Good Job!");
+    });
+    this.props.history.push("/location");
+    window.scrollTo(0, 0);
+  };
 
   render() {
     console.log(this.state.data[0]);
     return (
       <div className="location">
-        
-       <div className="headerText">
-       <i>Welcome to {this.state.location}</i>
-       </div>
+        <div className="container">
+          <nav className="navbar sticky-top">
+            <a className="nav-item nav-link" href="/" id="home">
+              Home
+            </a>
+            <a className="nav-item nav-link" href="/location">
+              Restaurant List
+            </a>
+            <form
+              className="form-inline my-2 my-lg-0"
+              onSubmit={this.searchBar.bind(this)}
+            >
+              <input
+                className="form-control mr-sm-2"
+                type="search"
+                placeholder="Enter City"
+                aria-label="Search"
+                name="inputLocation"
+              />
+              <button
+                className="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
+                Search
+              </button>
+            </form>
+          </nav>
+        </div>
+
+        <div className="headerText">
+          <i>Welcome to {this.state.location}</i>
+        </div>
         <div className="map-template">
           <Map
             google={this.props.google}
@@ -147,65 +184,69 @@ class Location extends React.Component {
                   lng: this.state.data[item].restaurant.location.longitude,
                 }}
                 onClick={this.onMarkerClick}
-              >
-              </Marker>
+              />
             ))}
             <InfoWindow
-          marker={this.state.activeMarker}
-          onClose={this.onInfoWindowClose}
-          visible={this.state.showingInfoWindow}>
-          <div>
-            <h1 className='infoMarker'>{this.state.selectedPlace.name}</h1>
-          </div>
-        </InfoWindow>
+              marker={this.state.activeMarker}
+              onClose={this.onInfoWindowClose}
+              visible={this.state.showingInfoWindow}
+            >
+              <div>
+                <h1 className="infoMarker">{this.state.selectedPlace.name}</h1>
+              </div>
+            </InfoWindow>
           </Map>
-        
         </div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        
-        
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
         <div className="row">
-          
           {Object.keys(this.state.data).map((item, i) => (
-          <div className="col-md-4">
-            <div className="card">
-          
-              <ul className="restaurants-input" key={i}>
-              <img class="card-img-top" src={this.state.data[item].restaurant.featured_image} alt="Image Not Found"></img>
-                <div className="card-header">
-                <li onClick={this.writeData.bind(this)} value={this.state.data[item].restaurant.id}>{this.state.data[item].restaurant.name
-                      ? this.state.data[item].restaurant.name
-                      : "Loading..."}
+            <div className="col-md-4">
+              <div className="card">
+                <ul className="restaurants-input" key={i}>
+                  <img
+                    class="card-img-top"
+                    src={this.state.data[item].restaurant.featured_image}
+                    alt="Image Not Found"
+                  />
+                  <div className="card-header">
+                    <li
+                      onClick={this.writeData.bind(this)}
+                      value={this.state.data[item].restaurant.id}
+                    >
+                      {this.state.data[item].restaurant.name
+                        ? this.state.data[item].restaurant.name
+                        : "Loading..."}
                     </li>
-                </div>
-                  
-                  <li>{this.state.data[item].restaurant.location.locality
-                    ? this.state.data[item].restaurant.location.locality
-                    : "Loading..."}
+                  </div>
+
+                  <li>
+                    {this.state.data[item].restaurant.location.locality
+                      ? this.state.data[item].restaurant.location.locality
+                      : "Loading..."}
                   </li>
-                
-                
-                  <li><i>{this.state.data[item].restaurant.cuisines
-                    ? this.state.data[item].restaurant.cuisines
-                    : "Loading..."}</i>
+
+                  <li>
+                    <i>
+                      {this.state.data[item].restaurant.cuisines
+                        ? this.state.data[item].restaurant.cuisines
+                        : "Loading..."}
+                    </i>
                   </li>
-              
-              </ul>
-            
+                </ul>
+              </div>
             </div>
-          </div>
-          
           ))}
+        </div>
       </div>
-    </div>
     );
   }
 }
