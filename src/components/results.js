@@ -58,7 +58,9 @@ render (){
      <NavLink to="/location">Back</NavLink>
          <h1>{this.state.data.name}</h1>
          <div className="map-template">
-         <img src={this.state.data.featured_image}></img>
+          <div className="imgBorder">
+            <img src={this.state.data.featured_image}></img>
+          </div>
          <br/>
          <br/>
          <Map
@@ -78,7 +80,7 @@ render (){
             }}>
               </Marker>
               </Map>
-              </div>
+            </div>
           <br/>
           <br/>
           <br/>
@@ -95,9 +97,13 @@ render (){
          <h2>Average Cost for Two: {this.state.data.currency}{this.state.data.average_cost_for_two}</h2>
          </div>
          <br />
-         <a href={this.state.data.url} target='_blank'><h2>Web Page</h2></a>
-         <a href={this.state.data.menu_url} target='_blank'><h2>Menu Page</h2></a>
-         <a href={this.state.data.photos_url} target='_blank'><h2>Photos</h2></a>
+         <h2 style={{color: 'white'}}>Learn more about {this.state.data.name} by visiting these links:</h2>
+          <span style={{display: 'inline'}}>
+            <a href={this.state.data.url } target='_blank' style={{marginRight: '15px'}}>Web Page</a>
+            <a href={this.state.data.menu_url} target='_blank' style={{marginRight: '15px', marginLeft: '15px'}}>Menu Page</a>
+            <a href={this.state.data.photos_url} target='_blank'style={{marginLeft: '15px'}}>Photos</a>
+          </span>
+         <br />
          <br />
          <NavLink to="/location">Back</NavLink>
      </div>
