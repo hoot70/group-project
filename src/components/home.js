@@ -59,7 +59,7 @@ class Home extends React.Component {
     return(
      <div className="Homepage">
      <div className="image">
-      <BackgroundSlideshow images={images}/>
+      <BackgroundSlideshow animationDelay= "3000" images={images}/>
     </div>
      <div className="homeText">Enter Your Location</div>
   
