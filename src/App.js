@@ -1,7 +1,6 @@
 import React from 'react';
-import logo, { ReactComponent } from './logo.svg'
 import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 import home from "./components/home"
 import location from "./components/location"
 import results from "./components/results"
