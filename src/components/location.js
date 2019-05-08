@@ -1,9 +1,6 @@
 import React from "react";
 import "../css/location.css";
-import { NavLink } from "react-router-dom";
 import * as firebase from "firebase";
-import Home from "./home";
-import { returnStatement } from "@babel/types";
 import Geocode from "react-geocode";
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from "google-maps-react";
 const database = firebase.database();

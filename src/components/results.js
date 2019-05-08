@@ -1,8 +1,7 @@
 import React from "react";
 import "../css/results.css";
-import { NavLink } from "react-router-dom";
 import * as firebase from "firebase";
-import { GoogleApiWrapper, InfoWindow, Map, Marker } from "google-maps-react";
+import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
 
 const database = firebase.database();
 const style = {
