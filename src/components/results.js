@@ -94,7 +94,13 @@ class Results extends React.Component {
         <div>
           <h1>{this.state.data.name}</h1>
           <div className="map-template">
-            <img src={this.state.data.featured_image} />
+                <div className="container2">
+                  <div className="imageBorder">
+                    <img src={this.state.data.featured_image} style={{borderTopLeftRadius: '25px', 
+                    borderTopRightRadius: '25px'}} />
+                  </div>
+                  <div className="whiteBox"><i>{this.state.data.name}</i></div>
+                </div>
             <br />
             <br />
             <Map
@@ -132,18 +138,19 @@ class Results extends React.Component {
           <br />
           <br />
           <div className="textColor">
-            <h2>
-              {this.state.data.location && this.state.data.location.locality}
-            </h2>
-            <h2>
-              {this.state.data.location && this.state.data.location.address}
-            </h2>
-            <h2>{this.state.data.cuisines}</h2>
-            <h2>
+          
+          <h2>
               Average Cost for Two: {this.state.data.currency}
               {this.state.data.average_cost_for_two}
             </h2>
           </div>
+          <hr style={{height: '5px', backgroundColor: 'white'}} />
+          <h2 style={{color: 'white'}}>Learn more about {this.state.data.name} by visiting these links:</h2>
+          <span style={{display: 'inline'}}>
+              <a href={this.state.data.url } target='_blank' style={{marginRight: '15px'}}>Web Page</a>
+              <a href={this.state.data.menu_url} target='_blank' style={{marginRight: '15px', marginLeft: '15px'}}>Menu Page</a>
+              <a href={this.state.data.photos_url} target='_blank'style={{marginLeft: '15px'}}>Photos</a>
+          </span>
             
             <br />
               <tr>
