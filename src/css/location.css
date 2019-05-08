@@ -83,3 +83,10 @@ img{
     color: royalblue;
     cursor: pointer;
 }
+
+.form-inline {
+    justify-content: right;
+}
+.navbar {
+    background-color: #282c34;
+}
