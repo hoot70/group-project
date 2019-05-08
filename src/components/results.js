@@ -144,17 +144,14 @@ class Results extends React.Component {
               {this.state.data.average_cost_for_two}
             </h2>
           </div>
-          <br />
-          <a href={this.state.data.url} target="_blank">
-            <h2>Web Page</h2>
-          </a>
-          <a href={this.state.data.menu_url} target="_blank">
-            <h2>Menu Page</h2>
-          </a>
-          <a href={this.state.data.photos_url} target="_blank">
-            <h2>Photos</h2>
-          </a>
-          <br />
+            
+            <br />
+              <tr>
+              <td/> <a href={this.state.data.url} target="_blank">Web Page </a>
+              <td/> <a href={this.state.data.menu_url} target="_blank"> Menu Page </a>
+              <td/> <a href={this.state.data.photos_url} target="_blank">Photos </a>
+              </tr>     
+            <br />
         </div>
       </div>
     );
