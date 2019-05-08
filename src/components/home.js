@@ -52,6 +52,7 @@ class Home extends React.Component {
         database.ref('location/').set(locationValue, function(error){
           error ? alert('error') : console.log('Good Job!')})
           this.props.history.push('/location');
+          window.scrollTo(0, 0);
       }
 
       render (){

@@ -115,6 +115,7 @@ class Location extends React.Component {
     database.ref('ID/').set(idValue, function(error){
       error ? alert('error') : console.log('Good Job!')})
       this.props.history.push('/results');
+      window.scrollTo(0, 0);
   }
 
 
