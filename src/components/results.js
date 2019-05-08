@@ -61,65 +61,6 @@ class Results extends React.Component {
     window.scrollTo(0, 0);
   };
 
-<<<<<<< HEAD
-render (){
-    return(
-     <div className="results">
-     <div>
-     <NavLink to="/location">Back</NavLink>
-         <h1>{this.state.data.name}</h1>
-         <div className="map-template">
-          <div className="imgBorder">
-            <img src={this.state.data.featured_image}></img>
-          </div>
-         <br/>
-         <br/>
-         <Map
-            google={this.props.google}
-            zoom={17}
-            style={style}
-            center={{
-              lat: this.state.data.location && this.state.data.location.latitude,
-              lng: this.state.data.location && this.state.data.location.longitude,
-            }}
-            onClick={this.onMapClicked}
-          >
-          <Marker
-          position={{
-              lat: this.state.data.location && this.state.data.location.latitude,
-              lng: this.state.data.location && this.state.data.location.longitude,
-            }}>
-              </Marker>
-              </Map>
-            </div>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <div className="textColor">
-         <h2>{this.state.data.location && this.state.data.location.locality}</h2>
-         <h2>{this.state.data.location && this.state.data.location.address}</h2>
-         <h2>{this.state.data.cuisines}</h2>
-         <h2>Average Cost for Two: {this.state.data.currency}{this.state.data.average_cost_for_two}</h2>
-         </div>
-         <br />
-         <h2 style={{color: 'white'}}>Learn more about {this.state.data.name} by visiting these links:</h2>
-          <span style={{display: 'inline'}}>
-            <a href={this.state.data.url } target='_blank' style={{marginRight: '15px'}}>Web Page</a>
-            <a href={this.state.data.menu_url} target='_blank' style={{marginRight: '15px', marginLeft: '15px'}}>Menu Page</a>
-            <a href={this.state.data.photos_url} target='_blank'style={{marginLeft: '15px'}}>Photos</a>
-          </span>
-         <br />
-         <br />
-         <NavLink to="/location">Back</NavLink>
-     </div>
-     </div>
-=======
   render() {
     return (
       <div className="results">
