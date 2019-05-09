@@ -63,11 +63,11 @@ class Home extends React.Component {
      <div className="image">
       <BackgroundSlideshow animationDelay= "3000" images={images}/>
     </div>
-     <div className="homeText">Enter Your Location</div>
+     <div className="homeText">Find Restaurants</div>
   
          <br />
          <form onSubmit={this.writeData.bind(this)}>
-        <input type="text" name="inputLocation" />
+        <input type="text" placeholder="Enter City Name" name="inputLocation" />
         <button type='submit'><span>Submit</span></button>
      </form>
      </div>
