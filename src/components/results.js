@@ -60,6 +60,14 @@ class Results extends React.Component {
     window.scrollTo(0, 0);
   };
 
+  imgLoad(){
+    if(this.state.data.featured_image){
+      return this.state.data.featured_image
+    }else{
+      return"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png"
+    }
+  }
+
   render() {
     return (
       <div className="results">
@@ -96,7 +104,7 @@ class Results extends React.Component {
           <div className="map-template">
                 <div className="container2">
                   <div className="imageBorder">
-                    <img src={this.state.data.featured_image} style={{borderTopLeftRadius: '25px', 
+                    <img src={this.imgLoad()} style={{borderTopLeftRadius: '25px', 
                     borderTopRightRadius: '25px'}} />
                   </div>
                   <div className="whiteBox"><i>{this.state.data.name}</i></div>

@@ -13,10 +13,7 @@
 li{
     list-style: none;
 }
-.card{
-    height: 7em;
-    margin: 10px;
-}
+
 .restaurants-input{
     padding-left: 0;
 }
@@ -62,6 +59,8 @@ h1{
                 5px 5px 0px #999,
                 6px 6px 0px #999;
     font-size: 32px;
+    background-color: #252c3c !important;
+    color: white;
 }
 .location{
     font-family: 'Oswald', sans-serif;
