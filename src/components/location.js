@@ -125,8 +125,17 @@ class Location extends React.Component {
     window.scrollTo(0, 0);
   };
 
+  imgLoad(item){
+    if(this.state.data[item].restaurant.featured_image){
+      return this.state.data[item].restaurant.featured_image
+    }else{
+      return"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png"
+    }
+  }
+
   render() {
     console.log(this.state.data[0]);
+
     return (
       <div className="location">
         <div className="container">
@@ -199,11 +208,7 @@ class Location extends React.Component {
             <div className="col-md-4">
               <div className="card">
                 <ul className="restaurants-input" key={i}>
-                  <img
-                    class="card-img-top"
-                    src={this.state.data[item].restaurant.featured_image}
-                    alt="Image Not Found"
-                  />
+                  <img src={this.imgLoad(item)} />
                   <div className="card-header">
                     <li
                       onClick={this.writeData.bind(this)}
