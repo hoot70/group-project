@@ -61,7 +61,7 @@ class Location extends React.Component {
         }
       )
         .then(response => {
-          return response.json();
+          return response.json()
         })
         .then(async myJson => {
           await fetch(
@@ -75,19 +75,20 @@ class Location extends React.Component {
             }
           )
             .then(res => {
-              if (res.ok) {
-                return res.json();
-              } else {
+              if (!res.ok) {
                 throw Error(res.statusText);
-              }
+                
+            }
+            return res.json()
             })
             .then(json => {
               this.setState({
                 data: json.restaurants,
                 isLoaded: true,
-              });
-            });
-        });
+              })
+            })
+        })
+        .catch(error => console.log(error))
       Geocode.setApiKey("AIzaSyCifmubhS9MPSr0F6DMjJw2izXGa4SlPE8");
       Geocode.fromAddress(`${snapshot.val()}`).then(
         response => {
