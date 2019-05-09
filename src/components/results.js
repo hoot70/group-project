@@ -92,7 +92,7 @@ class Results extends React.Component {
           </nav>
         </div>
         <div>
-          <h1>{this.state.data.name}</h1>
+          
           <div className="map-template">
                 <div className="container2">
                   <div className="imageBorder">
@@ -128,18 +128,15 @@ class Results extends React.Component {
               />
             </Map>
           </div>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
           <div className="textColor">
-          
-          <h2>
+            <h2>
+              {this.state.data.location && this.state.data.location.locality}
+            </h2>
+            <h2>
+              {this.state.data.location && this.state.data.location.address}
+            </h2>
+            <h2>{this.state.data.cuisines}</h2>
+            <h2>
               Average Cost for Two: {this.state.data.currency}
               {this.state.data.average_cost_for_two}
             </h2>
@@ -152,12 +149,6 @@ class Results extends React.Component {
               <a href={this.state.data.photos_url} target='_blank'style={{marginLeft: '15px'}}>Photos</a>
           </span>
             
-            <br />
-              <tr>
-              <td/> <a href={this.state.data.url} target="_blank">Web Page </a>
-              <td/> <a href={this.state.data.menu_url} target="_blank"> Menu Page </a>
-              <td/> <a href={this.state.data.photos_url} target="_blank">Photos </a>
-              </tr>     
             <br />
         </div>
       </div>
