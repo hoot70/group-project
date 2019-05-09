@@ -28,6 +28,7 @@
 
 .map-template > div {
     position: unset !important;
+    padding-bottom: 450px;
 }
 
 .textColor{
@@ -59,6 +60,7 @@ img{
     max-width: 500px !important;
     margin-left: auto;
     margin-right: auto;
+    padding: 0px !important;
 }
 
 .textColor{

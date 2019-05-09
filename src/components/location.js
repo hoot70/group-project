@@ -194,16 +194,6 @@ class Location extends React.Component {
             </InfoWindow>
           </Map>
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
         <div className="row">
           {Object.keys(this.state.data).map((item, i) => (
             <div className="col-md-4">
