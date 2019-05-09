@@ -66,8 +66,7 @@ class Location extends React.Component {
         .then(async myJson => {
           await fetch(
             `https://developers.zomato.com/api/v2.1/search?entity_id=${
-              myJson.location_suggestions[0].id
-            }&entity_type=city&count=20`,
+              myJson.location_suggestions[0].id}&entity_type=city&count=20`,
             {
               headers: {
                 "user-key": "353df7cd3c0ea42ca7228a954662f51b",
@@ -194,16 +193,6 @@ class Location extends React.Component {
             </InfoWindow>
           </Map>
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
         <div className="row">
           {Object.keys(this.state.data).map((item, i) => (
             <div className="col-md-4">

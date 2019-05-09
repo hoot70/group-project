@@ -28,6 +28,7 @@
 
 .map-template > div {
     position: unset !important;
+    padding-bottom: 450px;
 }
 
 .textColor{
