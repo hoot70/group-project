@@ -89,7 +89,3 @@ img{
 .navbar {
     background-color: #282c34;
 }
-
-this.state.location::first-letter {
-    text-transform: capitalize;
-}

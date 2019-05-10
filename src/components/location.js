@@ -24,10 +24,12 @@ class Location extends React.Component {
     };
   }
 
-  capitalize(string) 
-  {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-  };
+  capitalize(string) {
+    var lower = String(string).toLowerCase();
+    return lower.replace(/(^| )(\w)/g, function(x) {
+      return x.toUpperCase();
+    });
+  }
 
   onMarkerClick = (props, marker) =>
     this.setState({
@@ -50,7 +52,7 @@ class Location extends React.Component {
       });
   };
 
-    async componentDidMount() {
+  async componentDidMount() {
     const textRef = database.ref("location/");
     textRef.on("value", async snapshot => {
       this.setState({
@@ -69,12 +71,13 @@ class Location extends React.Component {
         }
       )
         .then(response => {
-          return response.json()
+          return response.json();
         })
         .then(async myJson => {
           await fetch(
             `https://developers.zomato.com/api/v2.1/search?entity_id=${
-              myJson.location_suggestions[0].id}&entity_type=city&count=20`,
+              myJson.location_suggestions[0].id
+            }&entity_type=city&count=20`,
             {
               headers: {
                 "user-key": "353df7cd3c0ea42ca7228a954662f51b",
@@ -85,18 +88,17 @@ class Location extends React.Component {
             .then(res => {
               if (!res.ok) {
                 throw Error(res.statusText);
-                
-            }
-            return res.json()
+              }
+              return res.json();
             })
             .then(json => {
               this.setState({
                 data: json.restaurants,
                 isLoaded: true,
-              })
-            })
+              });
+            });
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error));
       Geocode.setApiKey("AIzaSyCifmubhS9MPSr0F6DMjJw2izXGa4SlPE8");
       Geocode.fromAddress(`${snapshot.val()}`).then(
         response => {
@@ -133,14 +135,13 @@ class Location extends React.Component {
     window.scrollTo(0, 0);
   };
 
-  imgLoad(item){
-    if(this.state.data[item].restaurant.featured_image){
-      return this.state.data[item].restaurant.featured_image
-    }else{
-      return"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png"
+  imgLoad(item) {
+    if (this.state.data[item].restaurant.featured_image) {
+      return this.state.data[item].restaurant.featured_image;
+    } else {
+      return "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png";
     }
   }
-
 
   render() {
     console.log(this.state.data[0]);
