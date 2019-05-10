@@ -50,6 +50,7 @@ class Location extends React.Component {
     textRef.on("value", async snapshot => {
       this.setState({
         location: snapshot.val(),
+        data: []
       });
       await fetch(
         `https://developers.zomato.com/api/v2.1/cities?q=${snapshot.val()}`,
