@@ -24,6 +24,11 @@ class Location extends React.Component {
     };
   }
 
+  capitalize(string) 
+  {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   onMarkerClick = (props, marker) =>
     this.setState({
       activeMarker: marker,
@@ -45,7 +50,7 @@ class Location extends React.Component {
       });
   };
 
-  async componentDidMount() {
+    async componentDidMount() {
     const textRef = database.ref("location/");
     textRef.on("value", async snapshot => {
       this.setState({
@@ -136,6 +141,7 @@ class Location extends React.Component {
     }
   }
 
+
   render() {
     console.log(this.state.data[0]);
 
@@ -171,7 +177,7 @@ class Location extends React.Component {
         </div>
 
         <div className="headerText">
-          <i>Welcome to {this.state.location}</i>
+          <i>Welcome to {this.capitalize(this.state.location)}</i>
         </div>
         <div className="map-template">
           <Map
